@@ -23,6 +23,8 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("portfolio/", include("portfolio.urls")),
     path("about/",include("about.urls")),
+    path("services/", include("services.urls")),
+    path("pricing/",include("pricing.urls")),
+    path("blog/",include("blog.urls")),
     path("contact/", views.submitContact, name="contact"),
-    
 ]
