@@ -71,13 +71,10 @@
           <li><a href="{%url 'pricing'%}">Pricing</a></li>
           <li><a href="{%url 'blog' %}">Blog</a></li>
           <li><a href="{%url 'contact'%}" class="active">Contact</a></li>
+          <li><a href="{%url 'contact_list' %}">ContactList</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
-      <div class="header-social-links">
-        <a href="{%url 'contact_list' %}">ContactList</a>
-      </div>
 
     </div>
   </header>
@@ -143,8 +140,8 @@
           </div>
 
           <div class="col-lg-8">
-            <form action="{% url 'submit_contact' %}" method="POST" role="form">
-              {% csrf_token %}
+            <form action="" method="POST" role="form">
+              {% csrf_token %} 
               <table>
                 {{form.as_table}}
               </table>

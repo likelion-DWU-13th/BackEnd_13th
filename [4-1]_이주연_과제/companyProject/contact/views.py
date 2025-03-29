@@ -2,10 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import ContactMessage
 from .forms import ContactModelForm
 
-def contact(request):
-    form = ContactModelForm()
-    return render(request, "contact.html", {'form':form })
-
 # 폼 
 def submitContact(request):
     if request.method == 'POST':
@@ -15,8 +11,7 @@ def submitContact(request):
             return redirect('contact_list')
     else:
         form = ContactModelForm()
-    
-    return render(request, 'contact.html', {'form':form } )
+        return render(request, 'contact.html', {'form':form } )
 
 # 연락 리스트
 def contact_list(request):
@@ -39,8 +34,7 @@ def contact_edit(request, id):
             return redirect('contact_list')  
     else:
         form = ContactModelForm(instance=contact)
-    
-    return render(request, 'contact.html', {'form': form, 'id': id})
+        return render(request, 'contact.html', {'form': form, 'id': id})
     
 # contact 삭제
 def contact_delete(request, id):
