@@ -7,6 +7,8 @@ urlpatterns = [
     path("", views.home, name = "home"),
     path("FromL/", include("FromLove.urls")),
     path("TOL/", include("ToLove.urls")),
+    
+
 
     path("create/", views.create, name = "create"),
 ]
