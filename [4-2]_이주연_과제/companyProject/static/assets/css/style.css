@@ -1,0 +1,305 @@
+.hero .container {
+    background: color-mix(in srgb, var(--surface-color), transparent 40%);
+    position: relative;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+    border-top: 4px solid var(--accent-color);
+    z-index: 3;
+  }
+  @media (max-width: 1200px) {
+    .hero .container {
+      margin-left: 50px;
+      margin-right: 50px;
+    }
+  }
+  .widgets-container {
+    background-color: var(--surface-color);
+    padding: 30px;
+    margin: 60px 0 30px 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+/* Navmenu - Desktop */
+@media (min-width: 1200px) {
+  .navmenu {
+    padding: 0;
+  }
+
+  .navmenu ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+
+  .navmenu li {
+    position: relative;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    color: var(--nav-color);
+    padding: 18px 15px;
+    font-size: 13px;
+    font-family: var(--nav-font);
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    transition: 0.3s;
+  }
+
+  .navmenu a i,
+  .navmenu a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+    transition: 0.3s;
+  }
+
+  .navmenu li:last-child a {
+    padding-right: 0;
+  }
+
+  .navmenu li:hover>a,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--nav-hover-color);
+  }
+
+  .navmenu .dropdown ul {
+    margin: 0;
+    padding: 10px 0;
+    background: var(--nav-dropdown-background-color);
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    left: 14px;
+    top: 130%;
+    opacity: 0;
+    transition: 0.3s;
+    border-radius: 4px;
+    z-index: 99;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .navmenu .dropdown ul li {
+    min-width: 200px;
+  }
+
+  .navmenu .dropdown ul a {
+    padding: 10px 20px;
+    font-size: 15px;
+    text-transform: none;
+    color: var(--nav-dropdown-color);
+  }
+
+  .navmenu .dropdown ul a i {
+    font-size: 12px;
+  }
+
+  .navmenu .dropdown ul a:hover,
+  .navmenu .dropdown ul .active:hover,
+  .navmenu .dropdown ul li:hover>a {
+    color: var(--nav-dropdown-hover-color);
+  }
+
+  .navmenu .dropdown:hover>ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+  }
+
+  .navmenu .dropdown .dropdown ul {
+    top: 0;
+    left: -90%;
+    visibility: hidden;
+  }
+
+  .navmenu .dropdown .dropdown:hover>ul {
+    opacity: 1;
+    top: 0;
+    left: -100%;
+    visibility: visible;
+  }
+}
+/* 전체 container */
+.container {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+      /* 가로 중앙 정렬 */
+    justify-content: center; /* 세로 중앙 정렬 (선택) */
+    
+}
+
+/* 타이틀 */
+.page-title {
+    color: var(--default-color);
+    background-color: var(--background-color);
+    padding: 25px 0;
+    position: relative;
+  }
+
+.page-title h1 {
+font-size: 24px;
+font-weight: 700;
+}
+
+.page-title .breadcrumbs ol {
+display: flex;
+flex-wrap: wrap;
+list-style: none;
+padding: 0;
+margin: 0;
+font-size: 14px;
+font-weight: 400;
+}
+
+.page-title .breadcrumbs ol li+li {
+padding-left: 10px;
+}
+
+.page-title .breadcrumbs ol li+li::before {
+content: "/";
+display: inline-block;
+padding-right: 10px;
+color: color-mix(in srgb, var(--default-color), transparent 70%);
+}
+
+.accent-background {
+    --background-color: #1bbd36;
+    --default-color: #ffffff;
+    --heading-color: #ffffff;
+    --accent-color: #ffffff;
+    --surface-color: #2ae149;
+    --contrast-color: #ffffff;
+    text-align: center;
+  }
+.accent-background h1 {
+    font-size: 48px;
+}
+
+/* 테이블 */
+.contact-table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    margin-top : 10px;
+}
+
+.contact-table th, 
+.contact-table td {
+    border: 1px solid black;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+}
+
+.contact-table th:nth-child(1),  
+.contact-table td:nth-child(1) {
+    width: 20%;  /* 이름 칸 (짧게) */
+}
+
+.contact-table th:nth-child(2),  
+.contact-table td:nth-child(2) {
+    width: 30%;  /* 이메일 칸 (적당히) */
+}
+
+.contact-table th:nth-child(3),  
+.contact-table td:nth-child(3) {
+    width: 70%;  /* 제목 칸 (길게) */
+}
+
+/* 링크 */
+.contact-table a{
+    color:black;
+    text-decoration: none;
+}
+.contact-table a:hover{
+    color: var(--accent-color);
+    text-decoration-line: underline;
+}
+.contact-table a:active{
+    color:gray
+}
+
+/* 내용 */
+.content-box h5{
+    text-align:right;
+    color:lightgray;
+    font-style: italic;
+    padding-right:10px;
+}
+.content-box{
+    border : 1px solid black;
+    height: 500px;
+}
+.content-box p{
+    font-size: 18px;
+    padding:10px;
+}
+
+/* 버튼 */
+.button-container{
+    text-align:center;
+    margin-top:15px;
+    margin-bottom:15px;
+    display: flex;
+    justify-content: flex-start;
+}
+.button-previous, .button-edit, .button-delete{
+    border: 1px solid black;
+    background-color: #2ae149;
+    color : white !important;
+    padding: 5px;
+    text-decoration: none;
+    width: 10%;
+    text-align:center;
+    display: inline-block;
+}
+.button-edit{
+    margin-left:auto;
+    margin-right:10px;
+}
+.button-previous a, .button-edit a, .button-delete a{
+    color: white;
+    font-weight:bolder;
+    text-decoration: none;
+}
+
+hr{
+  width:100;
+}
+h5{
+  font-weight:bolder;
+}
+
+/*페이지네이션*/
+.pagination{
+  background-color: #2ae149;
+  margin-top:5px !important;
+  margin:auto;
+  display:inline-block;
+  text-align: center;
+  width:20%;
+}
+.pagination a{
+  color: white;
+  text-decoration: none;
+}
+.pagination span{
+  font-weight:bolder;
+  color: white
+}
+
+/*댓글 수정 페이지*/
+.comment-box{
+  border:1px solid black;
+  padding:5px;
+  margin-top:5px;
+}
