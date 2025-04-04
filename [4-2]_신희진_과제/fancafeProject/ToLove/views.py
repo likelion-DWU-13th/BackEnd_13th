@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect,  get_object_or_404
 from cafeMain.models import Post, Comment
 from cafeMain.forms import PostModelForm, CommentForm
+from django.core.paginator import Paginator
 
 def toL(request):
     return render(request, "ToL.html")
 
 def toL_list(request):
     letters = Post.objects.all().order_by('-created_at')
+    my_paginator = Paginator(letters, 5)
+    page_num = request.GET.get('page')
+    letters = my_paginator.get_page(page_num)
+    
     return render(request, "toL_list.html", {"letters" : letters})
 
 def toL_detail(request, letter_id):

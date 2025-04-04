@@ -105,7 +105,7 @@
           <div>
             <!--뭐가 안되는지 모르겟음. 댓글이 추가가 안됨-->
               <hr>
-              {% for comment in post.comments.all %}
+              {% for comment in letter.comments.all %}
               <p>{{ comment }}</p>
               <a class="btn btn-primary text-uppercase" 
                   href="{% url 'update_comment' letter.id comment.id %}">댓글 수정</a>
