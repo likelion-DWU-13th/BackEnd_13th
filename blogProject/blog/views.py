@@ -10,7 +10,10 @@ def create(request):
     if request.method == 'POST' or request.method == 'FILES':
         form = PostModelForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            # form.save() #form 데이터를 db에 저장
+            unfinished_form = form.save(commit=False)
+            unfinished_form.author = request.user
+            unfinished_form.save()
             return redirect('home')
     else: 
         form = PostModelForm()
