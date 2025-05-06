@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign UP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .user {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff; /* 파란색 */
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff; /* 파란색 */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* 어두운 파란색 */
+        }
+        .form-container {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sign UP</h1>
+    <form class="user" method="POST">
+        {% csrf_token %}
+        <div>
+            <input type="text" name="username" placeholder="ID">
+        </div>
+        <div>
+            <div>
+                <input type="password" name="password" placeholder="PassWord">
+            </div>
+            <div>
+                <input type="password" name="repeat" placeholder="PassWord again">
+            </div>
+        </div>
+        <input type="submit" value="sign up">
+    </form>
+
+
+</body>
+</html>
