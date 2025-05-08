@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Business Casual - Start Bootstrap Theme</title>
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <h1 class="site-heading text-center text-faded d-none d-lg-block">
+                <span class="site-heading-upper text-primary mb-3">Oliveyoung?</span>
+                <span class="site-heading-lower">Oh, Review</span>
+            </h1>
+        </header>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="{%url 'home' %}">Hello OliveYoung!</a>
+                <!-- 회원가입 / 로그인 -->
+                {% if user.is_authenticated %}
+                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'accounts:logout' %}">로그아웃</a></div>
+                {% else %}
+                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'accounts:signup' %}">회원가입</a></div>
+                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'accounts:login' %}">로그인</a></div>
+                {% endif %}
+                <!--회원가입 / 로그인 끝-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{%url 'home' %}">Home</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{%url 'products' %}">Products</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{%url 'review_list' %}">Review Posts</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="page-section">
+            <div class="container">
+                <div class="product-item">
+                    <div class="product-item-title d-flex">
+                        <div class="bg-faded p-5 d-flex ms-auto rounded">
+                            <h2 class="section-heading mb-0">
+                                <span class="section-heading-upper">어성초 성분으로 민감성 피부 진정!</span>
+                                <span class="section-heading-lower">아비브 어성초 흔적 에센스 패드</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{% static 'assets/img/products-01.jpg' %}" alt="..." />
+                    <div class="product-item-description d-flex me-auto">
+                        <div class="bg-faded p-5 rounded"><p class="mb-0">어성초 성분은 열감있는 피부를 진정시켜주는데에 효과적입니다. 아비브 흔적 에센스 패드는 앞면은 순면, 뒷면은 거즈면으로 되어있어 원하는 목적에 따라 다양하게 사용가능하다는 점이 장점입니다. 패드 한 장이 머금고 있는 에센스 양도 많고 무엇보다 패드의 보풀이 잘 일어나지 않습니다.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section">
+            <div class="container">
+                <div class="product-item">
+                    <div class="product-item-title d-flex">
+                        <div class="bg-faded p-5 d-flex me-auto rounded">
+                            <h2 class="section-heading mb-0">
+                                <span class="section-heading-upper">비건 뷰티, 기초에만 있지 않아!</span>
+                                <span class="section-heading-lower">프레시안 에그라이크 쿠션</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{% static 'assets/img/products-02.jpg' %}" alt="..." />
+                    <div class="product-item-description d-flex ms-auto">
+                        <div class="bg-faded p-5 rounded"><p class="mb-0">깐달걀 피부표현을 원하시는 분들에게 추천합니다. 모공, 붉은기, 잡티 커버력이 우수하고 지속력 또한 우수해 많은 고객님들께서 만족하셨습니다. 피부에 촘촘하고 정교하게 발려 만족스러운 피부 표현이 가능하고 동물 유래 성분을 포함하지 않은 저자극 비건 포뮬러를 통해 편안한 피부를 느낄 수 있습니다.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section">
+            <div class="container">
+                <div class="product-item">
+                    <div class="product-item-title d-flex">
+                        <div class="bg-faded p-5 d-flex ms-auto rounded">
+                            <h2 class="section-heading mb-0">
+                                <span class="section-heading-upper">촉촉한 볼륨 광채를 원한다면?</span>
+                                <span class="section-heading-lower">힌스 트루 디멘션 래디언스 밤</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{% static 'assets/img/products-03.jpg' %}" alt="..." />
+                    <div class="product-item-description d-flex me-auto">
+                        <div class="bg-faded p-5 rounded"><p class="mb-0">3초 만에 손쉽게 볼륨 광채를 불어 넣어주는 스틱. 끈적임 없이 쫀쫀하게 밀착되는 슬림핏 텍스처와 맑고 영롱하게 차오르는 내추럴 혈색광이 이 제품의 장점입니다. 손끝 체온으로 녹여 원하는 부위에 톡톡 두드려 섬세한 윤광을 연출해보세요. 세미 매트, 세미 글로우 피니쉬 쿠션과의 조합을 추천합니다.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0 small">Copyright &copy; Oh,Review</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
