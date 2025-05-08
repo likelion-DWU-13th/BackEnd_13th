@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 정보 - 치이카와포켓</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar signup-navbar">
+        <ul class="menu">
+            <li><a href="{% url 'home' %}">홈</a></li>
+            <li><a href="{%url 'list' %}">정보 모음</a></li>
+            {% if user.is_authenticated %} 
+            <li><a href="{%url 'accounts:logout' %}" class="logout">로그아웃</a></li>
+            {% else %}
+            <li><a href="{%url 'accounts:login' %}" class="login">로그인</a></li> 
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="signup-container">
+            <h2 style="color: #7eb6db;">내 정보</h2>
+            <div style="margin: 20px 0;">
+                <h3 style="color: #7eb6db;">{{ user.username }}님</h3>
+            </div>
+            <hr style="border: 1px solid #ddf3ff; margin: 20px 0;">
+            <div style="text-align: center;">
+                <a href="{% url 'accounts:my_scraps' %}" class="signup-btn" style="display: inline-block; margin-top: 20px;">
+                    내가 스크랩한 게시물
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>치이카와포켓</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar pink-navbar">
+        <ul class="menu">
+            <li><a href="{% url 'home' %}">홈</a></li>
+            <li><a href="{%url 'list' %}">정보 모음</a></li>
+            {% if user.is_authenticated %} 
+            <li><a href="{%url 'accounts:logout' %}" class="logout">로그아웃</a></li>
+            {% else %}
+            <li><a href="{%url 'accounts:login' %}" class="login">로그인</a></li> 
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li><a href="{%url 'accounts:profile' %}" class="profile-link">{{ user.username }}님</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="hero">
+        <div class="container">
+            <h1 class="main-title">먼작귀 포켓</h1>
+            <p class ="sub-title2">CHIIKAWA POCKET</p>
+            <p class="sub-title">귀여운 치이카와와 함께하는 정보 공유 공간</p>
+            {% if user.is_authenticated %}
+            <div class="button-container">
+                <a href="{%url 'create' %}" class="btn">정보 작성하기</a>
+            </div>
+            {% else %}
+            <div class="button-container">
+                <a href="{%url 'accounts:signup' %}" class="btn">회원가입</a>
+                <a href="{%url 'list' %}" class="btn">정보보기</a> 
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html> 

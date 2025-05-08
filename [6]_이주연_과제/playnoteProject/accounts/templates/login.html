@@ -1,0 +1,52 @@
+{% load socialaccount %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - 치이카와포켓</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar login-navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">홈</a></li>
+            <li><a href="{% url 'list' %}">정보 모음</a></li>
+        </ul>
+    </nav>
+    <div class="login-container">
+        <h2 style="color:#7eb6db;">로그인</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">아이디</label>
+                <input type="text" id="username" name="username" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" class="form-input" required>
+            </div>
+            {% if error_message %}
+                    <p style="color:#e02424;">{{ error_message }}</p>
+            {% endif %}
+            <div class="button-container">
+                <button type="submit" class="login-btn">로그인</button>
+            </div>
+        </form>
+        <div style="margin-top:1.5rem;">
+            <a href="{% provider_login_url 'google' %}" class="social-btn google">
+                <img src="{% static 'img/web_light_sq_SI@4x.png' %}">
+            </a>
+            <a href="{% provider_login_url 'naver' %}" class="social-btn naver">
+                <img src="{% static 'img/btnG_완성형.png' %}">
+            </a><br>
+        </div>
+        <div style="margin-top:1.5rem;">
+            <a href="{% url 'accounts:signup' %}" class="login-link">아직 계정이 없으신가요? 회원가입</a>
+        </div>
+    </div>
+</body>
+</html> 

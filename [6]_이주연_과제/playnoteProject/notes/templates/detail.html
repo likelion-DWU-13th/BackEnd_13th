@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ note.title }} - 치이카와포켓</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">홈</a></li>
+            <li><a href="{%url 'list' %}">정보 모음</a></li>
+            {% if user.is_authenticated %} 
+            <li><a href="{%url 'accounts:logout' %}" class="logout">로그아웃</a></li>
+            {% else %}
+            <li><a href="{%url 'accounts:login' %}" class="login">로그인</a></li> 
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li><a href="{%url 'accounts:profile' %}" class="profile-link">{{ user.username }}님</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="post-detail large-detail">
+            <div class="post-meta">
+                작성자: {{ note.author }} | 작성일: {{ note.created_at|date:"y-m-d" }}
+            </div>
+            <h2>{{ note.title }}</h2>
+            <div class="post-content"> 
+                {{ note.content|linebreaks }}
+            </div>
+            {% if note.image %}
+            <div class="post-image">
+                <img src="{{ note.image.url }}" alt="게시글 이미지" style="height: 50%;">
+            </div>
+            {% endif %}
+            <div class="like-container">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'note_likes' note.id %}" class="like-btn {% if user in note.like_users.all %}liked{% endif %}">
+                        <i class="fas fa-star"></i>
+                        <span class="like-count">{{ note.like_users.count }}</span>
+                    </a>
+                {% else %}
+                    <a href="javascript:void(0);" class="like-btn disabled" onclick="showLoginAlert()">
+                        <i class="fas fa-star"></i>
+                        <span class="like-count">{{ note.like_users.count }}</span>
+                    </a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <a href="{% url 'scraps' note.id %}" class="like-btn {% if user in note.scrap_users.all %}liked{% endif %}">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <span class="like-count"> {{ note.scrap_users.count }}</span>
+                    </a>
+                {% else %}
+                    <a href="javascript:void(0);" class="like-btn disabled" onclick="showLoginAlert()">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <span class="like-count"> {{ note.scrap_users.count }}</span>
+                    </a>
+                {% endif %}
+            </div>
+            {% if request.user == note.author %}
+            <div class="button-container">
+                <a href="{%url 'update' note.id %}" class="btn yellow-btn">수정하기</a> 
+                <a href="{% url 'delete' note.id %}" class="btn yellow-btn" onclick="return confirmDelete()">삭제하기</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="comment-list-container">
+            {% for comment in note.comments.all %}
+              <div class="comment-item">
+                <div class="comment-meta">
+                    {{ comment.author }}
+                    {{ comment.date|date:"y-m-d H:i" }}
+                </div>
+                <div class="comment-content">{{ comment }}</div>
+                {% if comment.photo %}
+                <div class="post-image">
+                    <img src="{{ comment.photo.url }}" alt="댓글 이미지" style="height: 50%;">
+                </div>
+                {% endif %}
+                <div class="like-container">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'comment_likes' comment.id %}" class="like-btn {% if user in comment.like_users.all %}liked{% endif %}">
+                            <i class="fas fa-star"></i>
+                            <span class="like-count">{{ comment.like_users.count }}</span>
+                        </a>
+                    {% else %}
+                        <a href="javascript:void(0);" class="like-btn disabled" onclick="showLoginAlert()">
+                            <i class="fas fa-star"></i>
+                            <span class="like-count">{{ comment.like_users.count }}</span>
+                        </a>
+                    {% endif %}
+                </div>
+                {% if request.user == comment.author %}
+                <div class="button-container">
+                  <a href="{%url 'comment_update' note.id comment.id %}" class="btn yellow-btn small-btn">수정</a>
+                  <a href="{%url 'comment_delete' note.id comment.id %}" class="btn yellow-btn small-btn" onclick="return confirmDelete()">삭제</a>
+                </div>
+                {% endif %}
+              </div>
+            {% empty %}
+              <p>아직 댓글이 없습니다 😢</p>
+            {% endfor %}
+        </div>
+
+        <div class="comment-form-container yellow-comment">
+            {% if user.is_authenticated %}
+                <form action="{%url 'comment_create' note.id%}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="content">댓글</label>
+                        <p>{{ comment_form.comment }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">이미지 첨부</label>
+                        {{ comment_form.photo }}
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" class="btn yellow-btn">답글 작성하기</button>
+                    </div>
+                </form>
+            {% else %}
+            <p>댓글은 로그인 후 작성가능합니다.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div id="loginAlert" class="login-alert">
+        <div class="login-alert__content">
+          <p>로그인 후 이용 가능합니다.</p>
+            <a href="{% url 'accounts:login' %}" class="login-btn">확인</a>
+            <button id="loginAlertClose" class="login-btn">취소</button>
+          </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html> 
