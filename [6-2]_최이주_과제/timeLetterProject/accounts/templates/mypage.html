@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Time Letter</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        /* 기본 배경을 어둡게 설정 */
+        body {
+            background-color: #333; /* 어두운 배경 색상 */
+            color: #fff; /* 글자 색상은 흰색 */
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* 네비게이션 바 */
+        nav {
+            background-color: #444; /* 네비게이션 배경 색 */
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        nav .navbar-brand,
+        nav .nav-link {
+            color: #fff;
+        }
+
+        nav .nav-link:hover {
+            color: #007bff;
+        }
+
+        /* 네비게이션 바 여백 추가 */
+        .navbar {
+            padding-top: 20px;  /* 네비게이션 위쪽 여백 */
+            padding-bottom: 20px;  /* 네비게이션 아래쪽 여백 */
+        }
+
+        /* 마이페이지 제목 */
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 50px; /* 상단 여백 */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* 글 목록 스타일 */
+        ul {
+            padding: 0;
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        ul li {
+            background-color: #444; /* 글 목록 배경을 어둡게 */
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        ul li a {
+            font-size: 1.2rem;
+            color: #007bff; /* 링크 색상 */
+            text-decoration: none;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* 페이지네이션 스타일 */
+        .pagination {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .pagination a {
+            color: #007bff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+
+        .pagination strong {
+            font-weight: bold;
+            margin: 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .pagination a:disabled {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body id="page-top">
+
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#page-top">TimeLetter</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 마이페이지 제목 -->
+    <h2 style="padding: 50px;">{{ request.user.username }}님의 작성 글</h2>
+
+    <!-- 게시글 목록 -->
+    <ul>
+        {% for post in my_posts %}
+        <li>
+            <strong><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></strong> - {{ post.created_at }}
+        </li>
+        {% empty %}
+        <li>작성한 글이 없습니다.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+        <span>
+            {% if my_posts.has_previous %}
+            <a href="?page=1">처음</a>
+            <a href="?page={{ my_posts.previous_page_number }}">이전</a>
+            {% endif %}
+
+            <strong>페이지 {{ my_posts.number }} / {{ my_posts.paginator.num_pages }}</strong>
+
+            {% if my_posts.has_next %}
+            <a href="?page={{ my_posts.next_page_number }}">다음</a>
+            <a href="?page={{ my_posts.paginator.num_pages }}">마지막</a>
+            {% endif %}
+        </span>
+    </div>
+
+</body>
+</html>
