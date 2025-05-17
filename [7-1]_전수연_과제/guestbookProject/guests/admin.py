@@ -1,0 +1,6 @@
+from django.contrib import admin
+from .models import Guest, Comment
+
+admin.site.register(Guest)
+admin.site.register(Comment)
+
